@@ -1,4 +1,4 @@
-# GettingCleaningData Course Project
+# Getting and Cleaning Data Course Project
 Project work for getting and cleaning data project
 
 
