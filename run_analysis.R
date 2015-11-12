@@ -44,5 +44,5 @@ tidydata$Activity <- ordered(tidydata$Activity, levels = levels(as.factor(tidyda
 
 #Group data by subject and then by activity and take mean for each level.
 tidydata_agg = ddply(tidydata, c("Subject_Id","Activity"), numcolwise(mean))
-write.table(tidydata_agg, file = "tidydata.txt", quote=FALSE )
+write.table(tidydata_agg, file = "tidydata.txt", quote=FALSE , row.names=FALSE, eol="\n")
 
