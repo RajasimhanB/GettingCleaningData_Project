@@ -31,15 +31,18 @@ measurements = measurements[, names(measurements[grep("mean|std", names(measurem
 names(measurements) = gsub("[-()]","", names(measurements))
 names(measurements) = gsub("*mean","Mean", names(measurements))
 names(measurements) = gsub("*std","StdDev", names(measurements))
+names(measurements) = gsub("*Acc","Accelerometer", names(measurements))
+names(measurements) = gsub("*Gyro","Gyroscope", names(measurements))
+names(measurements) = gsub("*Mag","Magnitude", names(measurements))
 
 #Merge subject and their activity types with the measurements data
 tidydata<- cbind(subject, activity, measurements)
 names(tidydata) <- c("Subject_Id","Activity", names(measurements))
-
+#print(names(tidydata))
 #Substitute activity with activity label
 tidydata$Activity <- ordered(tidydata$Activity, levels = levels(as.factor(tidydata$Activity)),  labels = levels(as.factor(act_lbl$V2)))
 
 #Group data by subject and then by activity and take mean for each level.
 tidydata_agg = ddply(tidydata, c("Subject_Id","Activity"), numcolwise(mean))
-write.table(tidydata_agg, file = "tidydata_agg.txt")
+write.table(tidydata_agg, file = "tidydata.txt", quote=FALSE )
 
